@@ -1,15 +1,18 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "app.py", "use": "@vercel/python" }
-  ],
+  "functions": {
+    "api/app.py": {
+      "runtime": "python3.8"
+    }
+  },
   "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "app.py" }
-  ],
-  "env": {
-    "FLASK_ENV": "production",
-    "FLASK_APP": "app.py",
-    "PYTHONUNBUFFERED": "true"
-  }
+    {
+      "src": "/api/predict",
+      "dest": "/api/app.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
